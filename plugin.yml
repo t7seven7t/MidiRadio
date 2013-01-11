@@ -1,0 +1,11 @@
+name: MidiRadio
+main: net.t7seven7t.midiradio.MidiRadio
+version: 1.0
+description: Plays midi files.
+commands:
+  play:
+    description: Play a song
+    usage: /<command> <args>
+  tune:
+    description: Tune in or out of the radio station.
+    usage: /<command> <in/out>

@@ -156,9 +156,9 @@ public class MidiPlayer {
 			}			
 			
 		} catch (InvalidMidiDataException ex) {
-			System.out.println("Invalid midi file: " + midiName);
+			System.err.println("Invalid midi file: " + midiName);
 		} catch (IOException ex) {
-			System.out.println("Can't read file: " + midiName);
+			System.err.println("Can't read file: " + midiName);
 		}
 		
 		for (Player player : tunedIn) {

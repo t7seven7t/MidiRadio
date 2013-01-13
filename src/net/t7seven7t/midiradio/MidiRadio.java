@@ -39,7 +39,9 @@ public class MidiRadio extends JavaPlugin {
 		midiPlayer = new MidiPlayer(this);
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 		
-		midiPlayer.playMidi(listMidiFiles()[0]);
+		String[] midis = listMidiFiles();
+		if (midis.length > 0)
+			midiPlayer.playMidi(midis[0]);
 		
 	}
 	

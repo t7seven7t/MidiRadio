@@ -5,7 +5,6 @@ package net.t7seven7t.midiradio;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
@@ -16,13 +15,6 @@ public class PlayerListener implements Listener {
 	
 	public PlayerListener(final MidiRadio plugin) {
 		this.plugin = plugin;
-	}
-	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		
-//		plugin.getMidiPlayer().tuneIn(event.getPlayer());
-		
 	}
 	
 	@EventHandler

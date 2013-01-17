@@ -6,7 +6,7 @@ package net.t7seven7t.midiradio;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
+import javax.sound.midi.MidiUnavailableException;
 
 import lombok.Getter;
 
@@ -21,11 +21,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class MidiRadio extends JavaPlugin {
 
-	private @Getter MidiPlayer midiPlayer;
-	
-	// To manage our ticking
-	private @Getter Timer timer;
-	
+	private @Getter RadioMidiPlayer midiPlayer;
+		
 	public void onEnable() {
 		
 		if (!getDataFolder().exists())
@@ -33,21 +30,23 @@ public class MidiRadio extends JavaPlugin {
 		
 		saveDefaultConfig();
 		reloadConfig();
-		
-		timer = new Timer();
-				
-		midiPlayer = new MidiPlayer(this);
+						
+		try {
+			midiPlayer = new RadioMidiPlayer(this);
+		} catch (MidiUnavailableException e) {
+			System.err.println("Could not obtain midi sequencer device.");
+		}
 		getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 		
 		String[] midis = listMidiFiles();
 		if (midis.length > 0)
-			midiPlayer.playMidi(midis[0]);
+			midiPlayer.playSong(midis[0]);
 		
 	}
 	
 	public void onDisable() {
 		
-		timer.cancel();
+		midiPlayer.stopPlaying();
 		
 	}
 	
@@ -63,7 +62,7 @@ public class MidiRadio extends JavaPlugin {
 					
 				}
 				
-				midiPlayer.playMidi(args[0]);
+				midiPlayer.playSong(args[0]);
 				
 				return true;
 				
@@ -139,13 +138,6 @@ public class MidiRadio extends JavaPlugin {
 		}
 		
 		return midiFiles.toArray(new String[0]);
-		
-	}
-	
-	public void resetTimer() {
-		
-		timer.cancel();
-		timer = new Timer();
 		
 	}
 	

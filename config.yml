@@ -1,1 +1,5 @@
+#This only works on the new player
 server-playback: false
+
+#Default to the old player. MidiRadio will otherwise try to obtain a sequencer first.
+use-old-player: false

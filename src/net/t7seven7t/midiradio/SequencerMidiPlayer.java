@@ -27,7 +27,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 /**
  * @author t7seven7t
  */
-public class RadioMidiPlayer implements Receiver {
+public class SequencerMidiPlayer implements Receiver, MidiPlayer {
 	private final MidiRadio plugin;
 	private final Sequencer sequencer;
 	
@@ -39,7 +39,7 @@ public class RadioMidiPlayer implements Receiver {
 	private int currentSong = 0;
 	private String midiName;
 	
-	public RadioMidiPlayer(MidiRadio plugin) throws MidiUnavailableException {
+	public SequencerMidiPlayer(MidiRadio plugin) throws MidiUnavailableException {
 		this.plugin = plugin;
 		
 		sequencer = MidiSystem.getSequencer();
@@ -108,7 +108,7 @@ public class RadioMidiPlayer implements Receiver {
 			player.sendMessage(ChatColor.AQUA + "Now playing: " + ChatColor.YELLOW + midiName);
 			
 		}
-		
+				
 		new BukkitRunnable() {
 
 			@Override

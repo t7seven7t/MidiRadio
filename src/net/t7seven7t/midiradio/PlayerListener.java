@@ -20,7 +20,8 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		
-		plugin.getMidiPlayer().tuneOut(event.getPlayer());
+		if (plugin.getMidiPlayer() != null)
+			plugin.getMidiPlayer().tuneOut(event.getPlayer());
 		
 	}
 	
